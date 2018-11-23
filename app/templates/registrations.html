@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>View Registrations</h2>
+<hr>
+<h4>Event Name: <b>{{event_name}}</b></h4>
+<hr>
+<center>
+<table style="width:60%;" class="table">
+
+    <!--Table head-->
+    <thead class="mdb-color darken-3">
+        <tr class="text-white">
+            <th>Name</th>
+            <th>No. of tickets</th>
+        </tr>
+    </thead>
+    <!--Table head-->
+
+    <!--Table body-->
+    <tbody>
+    	{% for key, value in data.items() %}
+        <tr>
+    			<td style="text-transform:capitalize;">{{ key[0][0] }} </td>
+    			<td>{{value}}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+    <!--Table body-->
+</table>
+</center>
+{% endblock %}

@@ -1,0 +1,301 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <title>Fest Management System</title>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- Bootstrap core CSS -->
+    <link href="static/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Material Design Bootstrap -->
+    <link href="static/css/mdb.min.css" rel="stylesheet">
+
+    <link href="static/css/style.css" rel="stylesheet">
+
+    <!-- Template styles -->
+    <style rel="stylesheet">
+        /* TEMPLATE STYLES */
+
+        main {
+            margin-top: 3rem;
+            ;
+        }
+
+        main .card {
+            margin-bottom: 2rem;
+        }
+
+        @media only screen and (max-width: 768px) {
+            .read-more {
+                text-align: center;
+            }
+        }
+
+        footer.page-footer a {
+            color: #323232;
+        }
+
+        footer.page-footer {
+            background-color: #dfe9f0;
+            margin-top: 2rem;
+            color: black;
+        }
+        .navbar .btn-group .dropdown-menu a:hover {
+            color: #000 !important;
+        }
+
+        .navbar .btn-group .dropdown-menu a:active {
+            color: #fff !important;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <!--Navbar-->
+        <nav class="navbar-expand-lg navbar fixed-top navbar-light white">
+
+            <!-- Navbar brand -->
+            <a class="navbar-brand" href="#">FEST-ON</a>
+
+            <!-- Collapse button -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+
+            <!-- Collapsible content -->
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+                <!-- Links -->
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    {% if admin %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="/insert-winner">Allocate Winners</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/create-event">Create new event</a>
+                        </li>
+
+
+
+                        <!-- Dropdown -->
+                        <li class="nav-item btn-group">
+                            <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Registrations </a>
+                            <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+                                {% for i in upcoming_code %}
+                                    <a class="dropdown-item" href="/registrations?event={{i[0]}}">{{i[1]}}</a>
+                                {% endfor %}
+                            </div>
+                        </li>
+                    {% endif %}
+                    <li class="nav-item btn-group">
+                        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Winners </a>
+                        <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+                            {% for i in events %}
+                                <a class="dropdown-item" href="/registrations?event={{i[0]}}">{{i[1]}}</a>
+                            {% endfor %}
+                        </div>
+                    </li>
+                    <li class="nav-item btn-group">
+                        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">All Events</a>
+                        <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" href="/">Upcoming</a>
+                            <a class="dropdown-item" href="/past-events">Past</a>
+                        </div>
+                    </li>
+
+                </ul>
+                <!-- Links -->
+
+                <!-- Search form -->
+                <a href="/logout" class="btn btn-primary">Logout</a>
+            </div>
+            <!-- Collapsible content -->
+
+        </nav>
+        <!--/.Navbar-->
+
+    </header>
+
+    <main>
+        <!--Main layout-->
+        <div class="container" style="padding-top: 3%;">
+
+            <!--Page heading-->
+            <div class="row wow fadeIn" data-wow-delay="0.2s">
+                <div class="col-md-12">
+                    <h1 class="h1-responsive">{{header_text}}
+                    </h1>
+                </div>
+            </div>
+            <!--/.Page heading-->
+            <hr>
+
+
+            <!--First row-->
+            <div class="row mt-5 wow fadeIn" data-wow-delay="0.2s">
+            	{% if events %}
+                {% for i in events %}
+                <!--First column-->
+                <div class="col-lg-6">
+
+                    <!--Card-->
+                    <div class="card">
+
+                        <!--Card image-->
+                        <img class="img-fluid" style=" max-height: 300px; max-width: 100%;" src="{{ i[6] }}" alt="{{ i[1] }}-image">
+
+                        <!--Card content-->
+                        <div class="card-body">
+                            <!--Title-->
+                            <h4 class="card-title">{{i[1] }}</h4><p class=" card-text float-right">Rs. {{ i[5] }}</p>
+                            <!--Text-->
+                            <p class="card-text"><bold>Venue:</bold> {{ i[4] }}</p>
+                            <a href="/events?event={{ i[0] }}" class="btn btn-primary">View More</a>
+                            <a href="/register" class=" float-right btn btn-success waves-effect waves-light">Register</a>
+
+                        </div>
+
+                    </div>
+                    <!--/.Card-->
+
+                </div>
+                {% endfor %}
+                {% else %}
+                <h4>Sorry! No Upcoming Events</h4>
+                {% endif %}
+                <!--/.First column-->
+            </div>
+
+                <!--Second column-->
+
+                <!--/.Second column-->
+
+            </div>
+            <!--/.First row-->
+
+
+            <hr>
+
+            {# <!--Pagination-->
+            <nav class="row d-flex justify-content-center mt-5">
+                <ul class="pagination pg-dark">
+                    <!--Arrow left-->
+                    <li class="page-item">
+                        <a class="page-link" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                    </li>
+
+                    <!--Numbers-->
+                    <li class="page-item active"><a class="page-link">1</a></li>
+                    <li class="page-item"><a class="page-link">2</a></li>
+                    <li class="page-item"><a class="page-link">3</a></li>
+                    <li class="page-item"><a class="page-link">4</a></li>
+                    <li class="page-item"><a class="page-link">5</a></li>
+
+                    <!--Arrow right-->
+                    <li class="page-item">
+                        <a class="page-link" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <!--/.Pagination--> #}
+        </div>
+        <!--/.Main layout-->
+    </main>
+
+    <!--Footer-->
+    <footer class="page-footer center-on-small-only">
+        <!--Footer links-->
+        <div class="container-fluid">
+            <div class="row">
+                <!--First column-->
+                <div class="col-lg-3 col-md-6 ml-auto">
+                    <h5 class="title mb-3"><strong>About FEST-ON</strong></h5>
+                    <p>FEST-ON is an online platform for event registrations and management for a college.</p>
+
+                </div>
+                <!--/.First column-->
+                <hr class="w-100 clearfix d-sm-none">
+                <!--Second column-->
+                <div class="col-lg-3 col-md-6 ml-auto">
+                    <h5 class="title mb-3"><strong>View Upcoming Events</strong></h5>
+                    <ul>
+                        {% for i in events %}
+                        <li>
+                            <a href="/events?event={{ i[0] }}">{{i[1]}}</a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <!--/.Second column-->
+                <hr class="w-100 clearfix d-sm-none">
+                <!--Third column-->
+                <div class="col-lg-3 col-md-6 ml-auto">
+                    <h5 class="title mb-3"><strong>Most Popular Events</strong></h5>
+                    <ul>
+                        {% for i in popular %}
+                        <li>
+                            <a href="/events?event={{ i[0] }}">{{ i[1] }}</a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <!--/.Third column-->
+
+                <!--/.Fourth column-->
+            </div>
+        </div>
+        <!--/.Footer links-->
+        <hr>
+        <!--/.Call to action-->
+
+        <!--Copyright-->
+        <div class="footer-copyright">
+            <div class="containter-fluid">
+                Copyright 2018-19</a>
+            </div>
+        </div>
+        <!--/.Copyright-->
+    </footer>
+    <!--/.Footer-->
+
+    <!-- SCRIPTS -->
+
+    <!-- JQuery -->
+    <script type="text/javascript" src="static/js/jquery-3.1.1.min.js"></script>
+
+    <!-- Bootstrap dropdown -->
+    <script type="text/javascript" src="static/js/popper.min.js"></script>
+
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript" src="static/js/bootstrap.min.js"></script>
+
+    <!-- MDB core JavaScript -->
+    <script type="text/javascript" src="static/js/mdb.min.js"></script>
+
+    <script>
+        new WOW().init();
+    </script>
+
+</body>
+
+</html>

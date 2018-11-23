@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+        <!--Main layout-->
+        <div class="container">
+   				 <div class="modal-dialog" role="document">
+   				 	<div class="modal-header text-center">
+                		<h4 class="modal-title w-100 font-bold">Add New Event</h4>
+            		</div>
+   				 	<div class="modal-content">
+						<form method="POST" action="/create-event">
+							<div class="col-md-12">
+								<input name='event_code' type='text' placeholder="Event Code" class="form-control">
+								<input name='title' type='text' placeholder="Title" class="form-control">
+								<input name='date' type='date' placeholder="Date" class="form-control">
+								<input name='desc' type='textbox' placeholder="Description" class="form-control">
+								<input name='venue' type='text' placeholder="Venue" class="form-control">
+								<input name='price' type='number' placeholder="Price" class="form-control">
+								<input name='coordinator' type='number' placeholder="Coordinator" class="form-control">
+
+								<input type='submit'  class="btn btn-sm btn-indigo" value='Submit'>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+
+{% endblock %}
+

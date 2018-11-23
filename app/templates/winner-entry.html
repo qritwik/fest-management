@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block content %}
+
+	<h2>Add Winners</h2>
+	<hr>
+
+			<form method="POST" action="/insert-winner">
+				<div class="col-md-6">
+				<div class="form-group">
+					<label for="sel1">Select Event:</label>
+  					<select class="form-control" name='event'>
+						{% for i in events %}
+					  		<option class="form-control" value="{{i[0]}}">{{i[1]}}</option>
+						{% endfor %}
+					</select>
+				</div>
+				<div class="form-group">
+					<label for="sel1">Select Name:</label>
+  					<select class="form-control" name='name'>
+					{% for i in names %}
+				  		<option class="form-control" value="{{i[0]}}">{{i[4]}}</option>
+					{% endfor %}
+					</select>
+				</div>
+				<div class="form-group">
+					<label for="sel1">Select Rank:</label>
+					<select class="form-control" name='rank'>
+			  			<option class="form-control" value="1">1</option>
+			  			<option class="form-control" value="2">2</option>
+			  			<option class="form-control" value="3">3</option>
+					</select>
+				</div>
+					<br>
+					<input type='submit' class="btn btn-sm btn-outline-info waves-effect" value='Submit'>
+				</div>
+			</form>
+{% endblock %}
